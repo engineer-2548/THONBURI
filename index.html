@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THONBURI Art Fest 2025 | ซีคอนบางแค</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Prompt:wght@300;400;500;600;700;800;900&family=Chakra+Petch:wght@300;400;500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            --secondary-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 25%, #30cfd0 50%, #330867 100%);
+            --neon-pink: #ff006e;
+            --neon-blue: #3a86ff;
+            --neon-purple: #8338ec;
+            --neon-yellow: #ffbe0b;
+        }
+        
+        * {
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        .font-bebas {
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 0.05em;
+        }
+        
+        .font-chakra {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+            background: #0a0a0a;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a0033, #330066, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--neon-pink), transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--neon-blue), transparent);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .orb3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--neon-purple), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -100px) scale(1.1); }
+            50% { transform: translate(-100px, 100px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            color: #fff;
+            font-size: 6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 
+                0.05em 0 0 rgba(255, 0, 0, .75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, .75),
+                0.025em 0.05em 0 rgba(0, 0, 255, .75);
+            animation: glitch 2s infinite;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--neon-pink);
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--neon-blue);
+            z-index: -2;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.05em -0.025em 0 rgba(0, 255, 0, .75), -0.025em 0.05em 0 rgba(0, 0, 255, .75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, .75), -0.05em -0.025em 0 rgba(0, 255, 0, .75), -0.025em 0.05em 0 rgba(0, 0, 255, .75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, .75), 0.025em 0.025em 0 rgba(0, 255, 0, .75), -0.05em -0.05em 0 rgba(0, 0, 255, .75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, .75), 0.025em 0.025em 0 rgba(0, 255, 0, .75), -0.05em -0.05em 0 rgba(0, 0, 255, .75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, .75), 0.05em 0 0 rgba(0, 255, 0, .75), 0 -0.05em 0 rgba(0, 0, 255, .75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, .75), 0.05em 0 0 rgba(0, 255, 0, .75), 0 -0.05em 0 rgba(0, 0, 255, .75); }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 30px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 25px, 0); }
+        }
+        
+        /* Neon Cards */
+        .neon-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .neon-card:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+        
+        .neon-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 0, 110, 0.3);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Neon Text */
+        .neon-text {
+            color: #fff;
+            text-shadow: 
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-pink),
+                0 0 80px var(--neon-pink);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Particle Effect */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-float 4s linear;
+        }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+        
+        /* 3D Hover Effect */
+        .hover-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .hover-3d:hover {
+            transform: rotateY(10deg) rotateX(-10deg);
+        }
+        
+        /* Pulse Wave */
+        .pulse-wave {
+            animation: pulse-wave 2s linear infinite;
+        }
+        
+        @keyframes pulse-wave {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 110, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 0, 110, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 110, 0); }
+        }
+        
+        /* Text Reveal */
+        .text-reveal {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .text-reveal::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .text-reveal:hover::after {
+            left: 100%;
+        }
+        
+        /* Modern Toggle */
+        .modern-toggle {
+            width: 70px;
+            height: 35px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .modern-toggle::after {
+            content: '';
+            position: absolute;
+            width: 27px;
+            height: 27px;
+            background: #fff;
+            border-radius: 50%;
+            top: 4px;
+            left: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modern-toggle.active {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            box-shadow: 0 0 20px rgba(240, 147, 251, 0.5);
+        }
+        
+        .modern-toggle.active::after {
+            transform: translateX(35px);
+        }
+        
+        /* Light Mode Styles */
+        .light-mode {
+            background: #fff;
+        }
+        
+        .light-mode .animated-bg {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0, #ff7675, #fdcb6e);
+            background-size: 400% 400%;
+        }
+        
+        .light-mode .neon-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .light-mode .glitch,
+        .light-mode .neon-text {
+            color: #2d3436;
+            text-shadow: 
+                0 0 10px rgba(255, 0, 110, 0.5),
+                0 0 20px rgba(255, 0, 110, 0.3);
+        }
+        
+        .light-mode .text-white {
+            color: #2d3436 !important;
+        }
+        
+        .light-mode .text-gray-300 {
+            color: #636e72 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen transition-all duration-500">
+    
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+    
+    <!-- Theme Toggle -->
+    <div class="fixed top-6 right-6 z-50 flex items-center space-x-3">
+        <span class="text-white text-lg">🌞</span>
+        <div class="modern-toggle" id="themeToggle"></div>
+        <span class="text-white text-lg">🌙</span>
+    </div>
+    
+    <!-- Header -->
+    <header class="relative py-20 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="glitch font-bebas mb-4" data-text="THONBURI Art Fest">
+                THONBURI Art Fest
+            </h1>
+            <div class="flex justify-center items-center space-x-4 text-2xl text-white">
+                <span class="neon-text font-chakra">✨ 9-13 กรกฎาคม 2568 ✨</span>
+            </div>
+            <p class="text-xl text-gray-300 mt-4 font-mitr">📍 ซีคอนบางแค</p>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 relative z-10">
+        
+        <!-- Intro Section -->
+        <section class="mb-16">
+            <div class="neon-card p-10 hover-3d">
+                <h2 class="text-4xl font-bold mb-6 neon-text font-chakra">🎨 ชาวฝั่งธนฯ ฟังกันให้ดี!</h2>
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    happening และซีคอนบางแคขอชวนคนรักศิลปะไปพบกับงานอาร์ตเฟสของชาวฝั่งธนฯ ใน 'THONBURI Art Fest' 
+                    ที่เราคัดสรรศิลปิน นักออกแบบ และงานคราฟต์หลายรูปแบบมาสร้างสีสันกลางห้าง ท่ามกลางบรรยากาศฝั่งธนฯ 
+                    ผ่านสายตางานกราฟิกและงานออกแบบ แถมด้วยกิจกรรมสนุกๆ อย่างตู้ถ่ายภาพจาก Sixsheet 
+                    ที่รอให้คุณได้เก็บภาพความประทับใจกลับบ้านกันด้วยล่ะ! 📸
+                </p>
+            </div>
+        </section>
+        
+        <!-- Mini Concert Section -->
+        <section class="mb-16">
+            <div class="neon-card p-10">
+                <h2 class="text-4xl font-bold mb-8 text-center neon-text font-chakra">🎶 มินิคอนเสิร์ต</h2>
+                <p class="text-center mb-8 text-gray-300 text-xl">แฟนคลับชวนฟังทางนี้! ศิลปินที่ยกขบวนเสียงดนตรีมาเสิร์ฟกันถึงที่</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave">
+                        <span class="text-xl font-bold text-white text-reveal">Superbaker</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 0.2s">
+                        <span class="text-xl font-bold text-white text-reveal">La Ong Fong</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 0.4s">
+                        <span class="text-xl font-bold text-white text-reveal">Earth Patravee</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 0.6s">
+                        <span class="text-xl font-bold text-white text-reveal">loserpop</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 0.8s">
+                        <span class="text-xl font-bold text-white text-reveal">Purplecat</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 1s">
+                        <span class="text-xl font-bold text-white text-reveal">mute.</span>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d pulse-wave" style="animation-delay: 1.2s">
+                        <span class="text-xl font-bold text-white text-reveal">cheriie</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Vendors Section -->
+        <section class="mb-16">
+            <div class="neon-card p-10">
+                <h2 class="text-4xl font-bold mb-8 text-center neon-text font-chakra">🛒 บูทสินค้าและคาเฟ่</h2>
+                <p class="text-center mb-8 text-gray-300 text-xl">ห้ามพลาด! ตลอด 4 วันคุณจะได้เจอกับงานอาร์ต งานคราฟท์จากบูทสินค้ามากมาย</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">GAS STUDIO by The Duang</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">UNMELT</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">across</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">Supis</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">2an.</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">Plankarn</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">Hachi Records & Studio</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">สำนักพิมพ์ FULLSTOP</span>
+                    </div>
+                    <div class="neon-card p-4 text-center transform hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-medium">สำนักพิมพ์ happening</span>
+                    </div>
+                </div>
+                
+                <div class="mt-10 neon-card p-8 hover-3d" style="background: rgba(255, 165, 0, 0.1); border-color: rgba(255, 165, 0, 0.3);">
+                    <h3 class="text-3xl font-bold mb-4" style="color: #ffa500; text-shadow: 0 0 20px rgba(255, 165, 0, 0.8);">☕ Gimbocha ร้านชาคุณยาย</h3>
+                    <p class="text-gray-300 text-lg">
+                        คาเฟ่ชื่อดังที่เดินทางมาจากใจกลางเมือง ตั้งใจเสิร์ฟชาจีนในบรรยากาศที่น่ารักอบอุ่นให้กับหลานๆ 
+                        ตั้งแต่เมนูเย็นสดชื่นเบสชาจีน ไปจนถึงชาร้อนและขนมที่ยายอบอุ่นๆ จากเตา! 🍵
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Event Details -->
+        <section class="mb-16">
+            <div class="neon-card p-10">
+                <h2 class="text-4xl font-bold mb-8 text-center neon-text font-chakra">📅 รายละเอียดงาน</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="neon-card p-6 text-center hover-3d">
+                        <p class="text-2xl font-bold mb-2" style="color: var(--neon-yellow); text-shadow: 0 0 10px rgba(255, 190, 11, 0.8);">📍 สถานที่</p>
+                        <p class="text-xl text-white">ชั้น 1 ซีคอนบางแค ฮอลล์</p>
+                    </div>
+                    <div class="neon-card p-6 text-center hover-3d">
+                        <p class="text-2xl font-bold mb-2" style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(58, 134, 255, 0.8);">⏰ เวลาเปิด-ปิด</p>
+                        <p class="text-lg text-white">วันธรรมดา: 10.30 - 20.00 น.</p>
+                        <p class="text-lg text-white">วันเสาร์-อาทิตย์ และวันหยุด: 10.00 - 20.00 น.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="text-center mb-16">
+            <h2 class="text-5xl font-bold mb-8 font-bebas">
+                <span class="neon-text">ปักหมุดวันที่ไว้ให้ไว</span><br>
+                <span class="text-white">แล้วมาเจอกันแบบจุใจเร็วๆ นี้!</span>
+            </h2>
+            <div class="inline-block neon-card px-12 py-6 text-2xl font-bold pulse-wave cursor-pointer hover:scale-110 transition-transform">
+                <span class="neon-text font-chakra">9-13 กรกฎาคม 2568</span>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="relative z-10 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-2xl font-bold neon-text font-bebas mb-2">THONBURI Art Fest © 2025</p>
+            <p class="text-xl text-gray-300">happening x ซีคอนบางแ
