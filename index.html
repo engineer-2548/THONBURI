@@ -565,42 +565,64 @@
     </footer>
     
     <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            themeToggle.classList.toggle('active');
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
             
-            // Save preference
-            if (body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    body.classList.toggle('light-mode');
+                    themeToggle.classList.toggle('active');
+                    
+                    // Save preference
+                    try {
+                        if (body.classList.contains('light-mode')) {
+                            localStorage.setItem('theme', 'light');
+                        } else {
+                            localStorage.setItem('theme', 'dark');
+                        }
+                    } catch (e) {
+                        console.log('localStorage not available');
+                    }
+                });
+                
+                // Check saved preference
+                try {
+                    if (localStorage.getItem('theme') === 'light') {
+                        body.classList.add('light-mode');
+                        themeToggle.classList.add('active');
+                    }
+                } catch (e) {
+                    console.log('localStorage not available');
+                }
             }
-        });
         
-        // Check saved preference
-        if (localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
-            themeToggle.classList.add('active');
-        }
-        
-        // Particle Effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
-            particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            particle.style.borderRadius = '50%';
-            document.body.appendChild(particle);
+            // Particle Effect
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+                particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                particle.style.borderRadius = '50%';
+                document.body.appendChild(particle);
+                
+                setTimeout(function() { 
+                    if (particle && particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 4000);
+            }
             
-            setTimeout(() => particle.remove(), 4000);
-        }
-        
-        setInterval(createParticle, 300);
+            // Create particles at intervals
+            let particleInterval = setInterval(createParticle, 300);
+            
+            // Stop particles after some time to improve performance
+            setTimeout(function() {
+                clearInterval(particleInterval);
+            }, 30000); // Stop after 30 seconds
         
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -656,17 +678,18 @@
         window.addEventListener('resize', handleResize);
         handleResize();
         
-        // Touch-friendly hover effects
-        if ('ontouchstart' in window) {
-            document.querySelectorAll('.hover-3d').forEach(element => {
-                element.addEventListener('touchstart', function() {
-                    this.style.transform = 'rotateY(10deg) rotateX(-10deg)';
+            // Touch-friendly hover effects
+            if ('ontouchstart' in window) {
+                document.querySelectorAll('.hover-3d').forEach(function(element) {
+                    element.addEventListener('touchstart', function() {
+                        this.style.transform = 'rotateY(10deg) rotateX(-10deg)';
+                    });
+                    element.addEventListener('touchend', function() {
+                        this.style.transform = 'rotateY(0) rotateX(0)';
+                    });
                 });
-                element.addEventListener('touchend', function() {
-                    this.style.transform = 'rotateY(0) rotateX(0)';
-                });
-            });
-        }
+            }
+        }); // End of DOMContentLoaded
     </script>
 </body>
 </html>
